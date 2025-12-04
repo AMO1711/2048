@@ -19,6 +19,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    private boolean finish = false;
+    private int high_score = 2;
     private int [][] matriz_tablero = new int[4][4], matriz_anterior = new int[4][4];
     GridLayout pantalla;
 
@@ -44,31 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         inicializar_matriz();
-        generar_numero();
-        mostrar_tablero();
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch(event.getAction()) {
-            case (MotionEvent.ACTION_DOWN):
-                Log.d("Macia", "Action was DOWN");
-                return true;
-            case (MotionEvent.ACTION_MOVE):
-                Log.d("Macia", "Action was MOVE");
-                return true;
-            case (MotionEvent.ACTION_UP):
-                Log.d("Macia", "Action was UP");
-                return true;
-            case (MotionEvent.ACTION_CANCEL):
-                Log.d("Macia", "Action was CANCEL");
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE):
-                Log.d("Macia", "Movement occurred outside bounds of current screen element");
-                return true;
-            default:
-                return super.onTouchEvent(event);
-        }
+        siguiente();
     }
 
     class MyGestureListener extends GestureDetector.SimpleOnGestureListener{
@@ -84,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             difX = e2.getX() - e1.getX();
             difY = e2.getY() - e1.getY();
 
-            if (Math.abs(Math.abs(difX) - Math.abs(difY)) > 200){
+            if (Math.abs(Math.abs(difX) - Math.abs(difY)) > 50){
                 if (Math.abs(difX) > Math.abs(difY)){
                     if (difX > 0){
                         goRight();
@@ -104,9 +82,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goRight(){
-        Log.d("Macia", "goRight: ");
         for (int fila = 0; fila < matriz_tablero.length; fila++) {
-            for (int columna = matriz_tablero.length-2; columna < 0; columna--) {
+            for (int columna = matriz_tablero.length-2; columna >= 0; columna--) {
                 for (int iteraciones = 0; iteraciones < matriz_tablero.length-columna-1; iteraciones++) {
                     if (matriz_tablero[fila][columna+iteraciones+1] == 0){
                         matriz_tablero[fila][columna+iteraciones+1] = matriz_tablero[fila][columna+iteraciones];
@@ -115,19 +92,67 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-        mostrar_tablero();
+        siguiente();
     }
 
     public void goLeft(){
-
+        for (int fila = 0; fila < matriz_tablero.length; fila++) {
+            for (int columna = 1; columna < matriz_tablero.length; columna++) {
+                for (int iteraciones = 0; iteraciones < columna; iteraciones++) {
+                    if (matriz_tablero[fila][columna-iteraciones-1] == 0){
+                        matriz_tablero[fila][columna-iteraciones-1] = matriz_tablero[fila][columna-iteraciones];
+                        matriz_tablero[fila][columna-iteraciones] = 0;
+                    }
+                }
+            }
+        }
+        siguiente();
     }
 
     public void goUp(){
-
+        for (int columna = 0; columna < matriz_tablero.length; columna++) {
+            for (int fila = 1; fila < matriz_tablero.length; fila++) {
+                for (int iteraciones = 0; iteraciones < fila; iteraciones++) {
+                    if (matriz_tablero[fila-iteraciones-1][columna] == 0){
+                        matriz_tablero[fila-iteraciones-1][columna] = matriz_tablero[fila-iteraciones][columna];
+                        matriz_tablero[fila-iteraciones][columna] = 0;
+                    }
+                }
+            }
+        }
+        siguiente();
     }
 
     public void goDown(){
+        for (int columna = 0; columna < matriz_tablero.length; columna++) {
+            for (int fila = matriz_tablero.length-2; fila >= 0; fila--) {
+                for (int iteraciones = 0; iteraciones < matriz_tablero.length-fila-1; iteraciones++) {
+                    if (matriz_tablero[fila+iteraciones+1][columna] == 0){
+                        matriz_tablero[fila+iteraciones+1][columna] = matriz_tablero[fila+iteraciones][columna];
+                        matriz_tablero[fila+iteraciones][columna] = 0;
+                    }
+                }
+            }
+        }
+        siguiente();
+    }
 
+    public void siguiente(){
+        boolean continuar;
+
+        actualizar_high_score();
+
+        if (!finish && high_score==2048){
+            finish = true;
+            game_complete();
+        }
+
+        continuar = generar_numero();
+        if (!continuar){
+            game_over();
+        }
+
+        mostrar_tablero();
     }
 
     public void mostrar_tablero (){
@@ -147,18 +172,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void generar_numero(){
-        boolean generado = false;
+    public boolean generar_numero(){
+        boolean lleno = true;
         int numero_aleatorio, fila, columna;
 
-        while (!generado){
+        for (int i = 0; i < matriz_tablero.length; i++) {
+            for (int j = 0; j < matriz_tablero.length; j++) {
+                if (matriz_tablero[i][j] == 0){
+                    lleno = false;
+                    break;
+                }
+            }
+        }
+
+        if (lleno){
+            return false;
+        }
+
+        while (true){
             numero_aleatorio = (int) (Math.random()*16);
             fila = numero_aleatorio/matriz_tablero.length;
             columna =  numero_aleatorio%matriz_tablero.length;
 
             if (matriz_tablero[fila][columna] == 0){
-                generado = true;
                 matriz_tablero[fila][columna] = 2;
+                return true;
             }
         }
     }
@@ -169,5 +207,26 @@ public class MainActivity extends AppCompatActivity {
                 matriz_tablero[fila][columna] = 0;
             }
         }
+    }
+
+    public void actualizar_high_score(){
+        for (int fila = 0; fila < matriz_tablero.length; fila++) {
+            for (int columna = 0; columna < matriz_tablero.length; columna++) {
+                if (matriz_tablero[fila][columna] > high_score){
+                    high_score = matriz_tablero[fila][columna];
+                    TextView panel_high_score = findViewById(R.id.high_score);
+                    panel_high_score.setText(String.valueOf(high_score));
+                }
+            }
+        }
+
+    }
+
+    public void game_over(){
+
+    }
+
+    public void game_complete(){
+
     }
 }

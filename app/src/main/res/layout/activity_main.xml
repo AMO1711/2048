@@ -9,149 +9,197 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Titulo"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Titulo"
+            android:textSize="26sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"/>
+
+        <TextView
+            android:id="@+id/high_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:text="2" />
+    </LinearLayout>
 
     <GridLayout
         android:id="@+id/cuadricula"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:columnCount="4">
+        android:columnCount="4"
+        android:background="@color/grey">
 
         <TextView
             android:id="@+id/casilla0"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla1"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla2"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla3"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla4"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla5"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla6"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla7"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla8"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla9"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla10"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla11"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla12"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla13"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey" />
 
         <TextView
             android:id="@+id/casilla14"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
         <TextView
             android:id="@+id/casilla15"
             android:layout_rowWeight="1"
+            android:layout_margin="5dp"
             android:layout_height="80dp"
             android:layout_width="80dp"
             android:gravity="center"
-            android:text=" "/>
+            android:text=" "
+            android:background="@color/light_grey"/>
 
     </GridLayout>
 
