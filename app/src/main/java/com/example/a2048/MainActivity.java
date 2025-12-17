@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
                         matriz_tablero[fila][columna+iteraciones+1] = matriz_tablero[fila][columna+iteraciones];
                         matriz_tablero[fila][columna+iteraciones] = 0;
                     }
+
+                    if (matriz_tablero[fila][columna+iteraciones+1] == matriz_tablero[fila][columna+iteraciones]){
+                        matriz_tablero[fila][columna+iteraciones+1] *= 2;
+                        matriz_tablero[fila][columna+iteraciones] = 0;
+                    }
                 }
             }
         }
@@ -101,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int iteraciones = 0; iteraciones < columna; iteraciones++) {
                     if (matriz_tablero[fila][columna-iteraciones-1] == 0){
                         matriz_tablero[fila][columna-iteraciones-1] = matriz_tablero[fila][columna-iteraciones];
+                        matriz_tablero[fila][columna-iteraciones] = 0;
+                    }
+
+                    if (matriz_tablero[fila][columna-iteraciones-1] == matriz_tablero[fila][columna-iteraciones]){
+                        matriz_tablero[fila][columna-iteraciones-1] *= 2;
                         matriz_tablero[fila][columna-iteraciones] = 0;
                     }
                 }
@@ -117,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
                         matriz_tablero[fila-iteraciones-1][columna] = matriz_tablero[fila-iteraciones][columna];
                         matriz_tablero[fila-iteraciones][columna] = 0;
                     }
+
+                    if (matriz_tablero[fila-iteraciones-1][columna] == matriz_tablero[fila-iteraciones][columna]){
+                        matriz_tablero[fila-iteraciones-1][columna] *= 2;
+                        matriz_tablero[fila-iteraciones][columna] = 0;
+                    }
                 }
             }
         }
@@ -129,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int iteraciones = 0; iteraciones < matriz_tablero.length-fila-1; iteraciones++) {
                     if (matriz_tablero[fila+iteraciones+1][columna] == 0){
                         matriz_tablero[fila+iteraciones+1][columna] = matriz_tablero[fila+iteraciones][columna];
+                        matriz_tablero[fila+iteraciones][columna] = 0;
+                    }
+
+                    if (matriz_tablero[fila+iteraciones+1][columna] == matriz_tablero[fila+iteraciones][columna]){
+                        matriz_tablero[fila+iteraciones+1][columna] *= 2;
                         matriz_tablero[fila+iteraciones][columna] = 0;
                     }
                 }
@@ -167,6 +187,44 @@ public class MainActivity extends AppCompatActivity {
                     casilla.setText(" ");
                 } else {
                     casilla.setText(String.valueOf(matriz_tablero[fila][columna]));
+                }
+
+                switch (matriz_tablero[fila][columna]){
+                    case 0:
+                        casilla.setBackgroundColor(getColor(R.color.light_grey));
+                        break;
+                    case 2:
+                        casilla.setBackgroundColor(getColor(R.color.score2));
+                        break;
+                    case 4:
+                        casilla.setBackgroundColor(getColor(R.color.score4));
+                        break;
+                    case 8:
+                        casilla.setBackgroundColor(getColor(R.color.score8));
+                        break;
+                    case 16:
+                        casilla.setBackgroundColor(getColor(R.color.score16));
+                        break;
+                    case 32:
+                        casilla.setBackgroundColor(getColor(R.color.score32));
+                        break;
+                    case 64:
+                        casilla.setBackgroundColor(getColor(R.color.score64));
+                        break;
+                    case 128:
+                        casilla.setBackgroundColor(getColor(R.color.score128));
+                        break;
+                    case 256:
+                        casilla.setBackgroundColor(getColor(R.color.score256));
+                        break;
+                    case 512:
+                        casilla.setBackgroundColor(getColor(R.color.score512));
+                        break;
+                    case 1024:
+                        casilla.setBackgroundColor(getColor(R.color.score1024));
+                        break;
+                    default:
+                        casilla.setBackgroundColor(getColor(R.color.scoreOver2048));
                 }
             }
         }
